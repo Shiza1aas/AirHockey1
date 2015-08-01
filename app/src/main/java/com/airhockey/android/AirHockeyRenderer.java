@@ -108,7 +108,17 @@ public class AirHockeyRenderer implements Renderer {
 
             // Mallets
             0f, -0.25f, 
-            0f,  0.25f
+            0f,  0.25f,
+
+                // Triangle 1 border
+                -0.55f, -0.55f,
+                0.55f,  0.55f,
+                -0.55f,  0.55f,
+
+                // Triangle 2 border
+                -0.55f, -0.55f,
+                0.55f, -0.55f,
+                0.55f,  0.55f,
         };
         
         vertexData = ByteBuffer
@@ -187,20 +197,26 @@ public class AirHockeyRenderer implements Renderer {
         glClear(GL_COLOR_BUFFER_BIT);
         glUnused.glEnable( 0x8642 );
 
+
+        
+
+
+        glUniform4f(uColorLocation,1.0f,1.0f,0.0f,1.0f);
+        glDrawArrays(GL_TRIANGLES, 10, 6);
         // Draw the table.
-        glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);		
+        glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
         glDrawArrays(GL_TRIANGLES, 0, 6);
-        
+
         // Draw the center dividing line.
-        glUniform4f(uColorLocation, 1.0f, 0.0f, 0.0f, 1.0f);		
-        glDrawArrays(GL_LINES, 6, 2); 
-        
-        // Draw the first mallet blue.        
-        glUniform4f(uColorLocation, 0.0f, 0.0f, 1.0f, 1.0f);		
+        glUniform4f(uColorLocation, 1.0f, 0.0f, 0.0f, 1.0f);
+        glDrawArrays(GL_LINES, 6, 2);
+
+        // Draw the first mallet blue.
+        glUniform4f(uColorLocation, 0.0f, 0.0f, 1.0f, 1.0f);
         glDrawArrays(GL_POINTS, 8, 1);
 
         // Draw the second mallet red.
-        glUniform4f(uColorLocation, 1.0f, 0.0f, 0.0f, 1.0f);		
+        glUniform4f(uColorLocation, 1.0f, 0.0f, 0.0f, 1.0f);
         glDrawArrays(GL_POINTS, 9, 1);
     }
 }
